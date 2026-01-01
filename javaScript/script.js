@@ -3,7 +3,7 @@ const addBtn = document.getElementById("addBtn")
 const nameInput = document.getElementById("nameInput")
 const phoneInput = document.getElementById("phoneNumberInput")
 const searchInput = document.getElementById("searchInput")
-const toast = document.getElementById("message")
+const message = document.getElementById("message")
 
 let contacts = [];
 
@@ -107,3 +107,9 @@ searchInput.addEventListener("keyup", () => {
 
   showContacts(result);
 });
+function showMessage() {
+  message.style.display = "block";
+  setTimeout(() => message.style.display = "none", 2000);
+}
+
+loadContacts();

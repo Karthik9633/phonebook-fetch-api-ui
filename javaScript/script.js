@@ -66,10 +66,33 @@ function showContacts(list) {
 
                 contact.name = newName;
                 contact.phone = newPhone;
-                renderContacts(contacts);
+                showContacts(contacts);
             });
         });
 
         grid.appendChild(card);
     });
 }
+
+addBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+
+  if (name === "" || phone === "") {
+    alert("All fields required");
+    return;
+  }
+
+  if (contacts.some(c => c.phone === phone)) {
+    alert("Duplicate phone number");
+    return;
+  }
+
+  contacts.push({ id: Date.now(), name, phone });
+
+  nameInput.value = "";
+  phoneInput.value = "";
+
+  showContacts(contacts);
+  showToast();
+});

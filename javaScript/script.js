@@ -47,7 +47,7 @@ function showContacts(list) {
     card.querySelector(".delete").addEventListener("click", () => {
       contacts = contacts.filter(c => c.id !== contact.id)
       showContacts(contacts)
-      showMessage("✅Contact deleted", "success")
+      showMessage("✅ Contact deleted", "success")
     })
 
     card.querySelector(".edit").addEventListener("click", () => {

@@ -5,111 +5,123 @@ const phoneInput = document.getElementById("phoneNumberInput")
 const searchInput = document.getElementById("searchInput")
 const message = document.getElementById("message")
 
-let contacts = [];
+let contacts = []
 
 async function loadContacts() {
-    const response = await fetch("data/contact.json");
-    contacts = await response.json();
-    showContacts(contacts)
+  const response = await fetch("data/contact.json")
+  contacts = await response.json()
+  showContacts(contacts)
+}
+
+function showMessage(text, type = "error") {
+  message.textContent = text
+  message.className = type
+  message.style.display = "block"
+
+  setTimeout(() => {
+    message.style.display = "none"
+  }, 2000)
 }
 
 function showContacts(list) {
-    grid.innerHTML = "";
+  grid.innerHTML = ""
 
-    if (list.length === 0) {
-        grid.innerHTML = `<p class="empty">No contacts found</p>`;
-        return;
-    }
+  if (list.length === 0) {
+    grid.innerHTML = `<p class="empty">No contacts found</p>`
+    return
+  }
 
-    list.forEach(contact => {
-        const card = document.createElement("div");
-        card.className = "card";
+  list.forEach(contact => {
+    const card = document.createElement("div")
+    card.className = "card"
 
-        card.innerHTML = `
+    card.innerHTML = `
       <h4>${contact.name}</h4>
       <p>${contact.phone}</p>
       <div class="actions">
         <button class="edit">Edit</button>
         <button class="delete">Delete</button>
       </div>
-    `;
+    `
 
-        card.querySelector(".delete").addEventListener("click", () => {
-            contacts = contacts.filter(c => c.id !== contact.id);
-            renderContacts(contacts);
-        });
+    card.querySelector(".delete").addEventListener("click", () => {
+      contacts = contacts.filter(c => c.id !== contact.id)
+      showContacts(contacts)
+      showMessage("Contact deleted", "success")
+    })
 
-        card.querySelector(".edit").addEventListener("click", () => {
-            card.innerHTML = `
-        <input value="${contact.name}">
-        <input value="${contact.phone}">
+    card.querySelector(".edit").addEventListener("click", () => {
+      card.innerHTML = `
+        <input type="text" value="${contact.name}">
+        <input type="text" value="${contact.phone}">
         <div class="actions">
           <button class="save">Save</button>
         </div>
-      `;
+      `
 
-            const [nameEdit, phoneEdit] = card.querySelectorAll("input");
+      const [nameEdit, phoneEdit] = card.querySelectorAll("input")
 
-            card.querySelector(".save").addEventListener("click", () => {
-                const newName = nameEdit.value.trim();
-                const newPhone = phoneEdit.value.trim();
+      card.querySelector(".save").addEventListener("click", () => {
+        const newName = nameEdit.value.trim()
+        const newPhone = phoneEdit.value.trim()
 
-                if (newName === "" || newPhone === "") {
-                    alert("All fields required");
-                    return;
-                }
+        if (newName === "" || newPhone === "") {
+          showMessage("Name and phone cannot be empty")
+          return
+        }
 
-                if (contacts.some(c => c.phone === newPhone && c.id !== contact.id)) {
-                    alert("Duplicate phone number");
-                    return;
-                }
+        if (contacts.some(c => c.phone === newPhone && c.id !== contact.id)) {
+          showMessage("Phone number already exists")
+          return
+        }
 
-                contact.name = newName;
-                contact.phone = newPhone;
-                showContacts(contacts);
-            });
-        });
+        contact.name = newName
+        contact.phone = newPhone
 
-        grid.appendChild(card);
-    });
+        showContacts(contacts)
+        showMessage("Contact updated", "success")
+      })
+    })
+
+    grid.appendChild(card)
+  })
 }
-
 addBtn.addEventListener("click", () => {
-  const name = nameInput.value.trim();
-  const phone = phoneInput.value.trim();
+  const name = nameInput.value.trim()
+  const phone = phoneInput.value.trim()
 
   if (name === "" || phone === "") {
-    alert("All fields required");
-    return;
+    showMessage("All fields are required")
+    return
   }
 
   if (contacts.some(c => c.phone === phone)) {
-    alert("Duplicate phone number");
-    return;
+    showMessage("Phone number already exists")
+    return
   }
 
-  contacts.push({ id: Date.now(), name, phone });
+  contacts.push({
+    id: Date.now(),
+    name,
+    phone
+  })
 
-  nameInput.value = "";
-  phoneInput.value = "";
+  nameInput.value = ""
+  phoneInput.value = ""
 
-  showContacts(contacts);
-  showToast();
-});
+  showContacts(contacts)
+  showMessage("Contact added successfully", "success")
+})
 
 searchInput.addEventListener("keyup", () => {
-  const value = searchInput.value.toLowerCase();
+  const value = searchInput.value.toLowerCase()
 
   const result = contacts.filter(c =>
     c.name.toLowerCase().includes(value) ||
     c.phone.includes(value)
-  );
+  )
 
-  showContacts(result);
-});
-function showMessage() {
-  message.style.display = "block";
-  setTimeout(() => message.style.display = "none", 2000);
-}
+  showContacts(result)
+})
 
-loadContacts();
+loadContacts()

@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Book |API |UI</title>
 </head>
+
 <body>
-    
+    <header class="header">
+        <h1>PhonebookPro</h1>
+    </header>
+
+    <div class="inputList">
+
+        <aside class="sidebar">
+            <h2>Add New Contact</h2>
+
+            <input id="nameInput" placeholder="Full Name">
+            <input id="phoneNumberInput" placeholder="Phone Number">
+            <button id="addBtn">Save Contact</button>
+
+            <h3>Find Contact</h3>
+            <input id="searchInput" placeholder="Search by name or number">
+        </aside>
+
+        <main class="content">
+            <h2>Your Directory</h2>
+            <div id="contactGrid" class="grid"></div>
+        </main>
+
+    </div>
+
+    <div id="message">✅ Contact saved successfully</div>
+
+    <script src="app.js"></script>
 </body>
+
 </html>

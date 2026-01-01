@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #0b1220, #0f1b33);
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    background: #0c162b;
+}
+
+
+.inputList {
+    display: flex;
+    gap: 28px;
+    padding: 32px;
+}
+
+.lists {
+    width: 320px;
+    background: #121f3d;
+    padding: 22px;
+    border-radius: 16px;
+}
+
+.lists input,
+.lists button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: none;
+}
+
+.lists button {
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+}
+
+.lists button:hover {
+    background: #2563eb;
+}
+
+
+.content {
+    flex: 1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: #162447;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.card input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.card p {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.actions {
+    margin-top: 8px;
+}
+
+.actions button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.edit {
+    background: #facc15;
+}
+
+.delete {
+    background: #ef4444;
+    color: white;
+}
+
+.save {
+    background: #22c55e;
+    color: white;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    opacity: 0.7;
+}
+
+
+#message {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #16a34a;
+    padding: 12px 18px;
+    border-radius: 8px;
+    display: none;
+}

@@ -62,9 +62,9 @@ body {
 }
 
 .card {
-    background: #162447;
-    padding: 16px;
-    border-radius: 14px;
+    background: linear-gradient(180deg, #162447, #131e3a);
+    padding: 18px;
+    border-radius: 16px;
 }
 
 .card input {
@@ -76,9 +76,23 @@ body {
 }
 
 .card p {
+    margin-top: 6px;
     font-size: 14px;
-    opacity: 0.85;
+    color: #93c5fd;
+    letter-spacing: 0.6px;
 }
+
+.card h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #e5edff;
+    letter-spacing: 0.3px;
+   margin-bottom: 20px;
+   margin-top: 20px;
+}
+
+
 
 .actions {
     margin-top: 8px;
@@ -180,6 +194,14 @@ body {
         font-size: 15px;
         padding: 12px;
     }
+     .card h4 {
+        font-size: 17px;
+    }
+
+    .card p {
+        font-size: 15px;
+    }
+
 }
 
 @media (max-width: 900px) {

@@ -99,7 +99,7 @@ body {
 }
 
 .actions button {
-    padding: 10px 14px;          /* bigger buttons */
+    padding: 10px 14px;         
     border: none;
     border-radius: 10px;
     cursor: pointer;

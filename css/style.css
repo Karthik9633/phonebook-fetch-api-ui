@@ -116,13 +116,12 @@ body {
 #message {
   display: none;
   padding: 10px;
+  font-weight: 700;
   margin-bottom: 10px;
   border-radius: 6px;
   font-size: 14px;
 }
-
 #message.error {
-  background: #ffe5e5;
   color: #c0392b;
 }
 

@@ -3,7 +3,7 @@ const addBtn = document.getElementById("addBtn")
 const nameInput = document.getElementById("nameInput")
 const phoneInput = document.getElementById("phoneNumberInput")
 const searchInput = document.getElementById("searchInput")
-const message = document.getElementById("message")
+const message = document.getElementById("toast");
 
 let contacts = []
 
@@ -14,13 +14,13 @@ async function loadContacts() {
 }
 
 function showMessage(text, type = "error") {
-  message.textContent = text
-  message.className = type
-  message.style.display = "block"
+  message.textContent = text;
+  message.className = type;
+  message.style.display = "block";
 
   setTimeout(() => {
-    message.style.display = "none"
-  }, 2000)
+    toast.style.display = "none";
+  }, 2000);
 }
 
 function showContacts(list) {

@@ -96,3 +96,14 @@ addBtn.addEventListener("click", () => {
   showContacts(contacts);
   showToast();
 });
+
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.toLowerCase();
+
+  const result = contacts.filter(c =>
+    c.name.toLowerCase().includes(value) ||
+    c.phone.includes(value)
+  );
+
+  showContacts(result);
+});

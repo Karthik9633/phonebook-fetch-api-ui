@@ -8,24 +8,24 @@ const toast = document.getElementById("message")
 let contacts = [];
 
 async function loadContacts() {
-  const response = await fetch("c.json");
-  contacts = await response.json();
-  showContacts(contacts)
+    const response = await fetch("c.json");
+    contacts = await response.json();
+    showContacts(contacts)
 }
 
 function showContacts(list) {
-  grid.innerHTML = "";
+    grid.innerHTML = "";
 
-  if (list.length === 0) {
-    grid.innerHTML = `<p class="empty">No contacts found</p>`;
-    return;
-  }
+    if (list.length === 0) {
+        grid.innerHTML = `<p class="empty">No contacts found</p>`;
+        return;
+    }
 
-  list.forEach(contact => {
-    const card = document.createElement("div");
-    card.className = "card";
+    list.forEach(contact => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-    card.innerHTML = `
+        card.innerHTML = `
       <h4>${contact.name}</h4>
       <p>${contact.phone}</p>
       <div class="actions">
@@ -34,11 +34,42 @@ function showContacts(list) {
       </div>
     `;
 
-    card.querySelector(".delete").addEventListener("click", () => {
-      contacts = contacts.filter(c => c.id !== contact.id);
-      renderContacts(contacts);
-    });
+        card.querySelector(".delete").addEventListener("click", () => {
+            contacts = contacts.filter(c => c.id !== contact.id);
+            renderContacts(contacts);
+        });
 
-   
-  });
+        card.querySelector(".edit").addEventListener("click", () => {
+            card.innerHTML = `
+        <input value="${contact.name}">
+        <input value="${contact.phone}">
+        <div class="actions">
+          <button class="save">Save</button>
+        </div>
+      `;
+
+            const [nameEdit, phoneEdit] = card.querySelectorAll("input");
+
+            card.querySelector(".save").addEventListener("click", () => {
+                const newName = nameEdit.value.trim();
+                const newPhone = phoneEdit.value.trim();
+
+                if (newName === "" || newPhone === "") {
+                    alert("All fields required");
+                    return;
+                }
+
+                if (contacts.some(c => c.phone === newPhone && c.id !== contact.id)) {
+                    alert("Duplicate phone number");
+                    return;
+                }
+
+                contact.name = newName;
+                contact.phone = newPhone;
+                renderContacts(contacts);
+            });
+        });
+
+        grid.appendChild(card);
+    });
 }

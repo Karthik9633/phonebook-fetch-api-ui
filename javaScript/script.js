@@ -47,7 +47,7 @@ function showContacts(list) {
     card.querySelector(".delete").addEventListener("click", () => {
       contacts = contacts.filter(c => c.id !== contact.id)
       showContacts(contacts)
-      showMessage("Contact deleted", "success")
+      showMessage("✅Contact deleted", "success")
     })
 
     card.querySelector(".edit").addEventListener("click", () => {
@@ -66,12 +66,12 @@ function showContacts(list) {
         const newPhone = phoneEdit.value.trim()
 
         if (newName === "" || newPhone === "") {
-          showMessage("Name and phone cannot be empty")
+          showMessage("❌ Name and phone cannot be empty")
           return
         }
 
         if (contacts.some(c => c.phone === newPhone && c.id !== contact.id)) {
-          showMessage("Phone number already exists")
+          showMessage("❌ Phone number already exists")
           return
         }
 
@@ -79,7 +79,7 @@ function showContacts(list) {
         contact.phone = newPhone
 
         showContacts(contacts)
-        showMessage("Contact updated", "success")
+        showMessage("✅ Contact updated", "success")
       })
     })
 
@@ -91,12 +91,12 @@ addBtn.addEventListener("click", () => {
   const phone = phoneInput.value.trim()
 
   if (name === "" || phone === "") {
-    showMessage("All fields are required")
+    showMessage("❌ All fields are required")
     return
   }
 
   if (contacts.some(c => c.phone === phone)) {
-    showMessage("Phone number already exists")
+    showMessage("❌ Phone number already exists")
     return
   }
 
@@ -110,7 +110,7 @@ addBtn.addEventListener("click", () => {
   phoneInput.value = ""
 
   showContacts(contacts)
-  showMessage("Contact added successfully", "success")
+  showMessage("✅ Contact added successfully", "success")
 })
 
 searchInput.addEventListener("keyup", () => {

@@ -34,6 +34,11 @@ function showContacts(list) {
       </div>
     `;
 
+    card.querySelector(".delete").addEventListener("click", () => {
+      contacts = contacts.filter(c => c.id !== contact.id);
+      renderContacts(contacts);
+    });
+
    
   });
 }

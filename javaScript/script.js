@@ -8,7 +8,7 @@ const message = document.getElementById("message")
 let contacts = [];
 
 async function loadContacts() {
-    const response = await fetch("c.json");
+    const response = await fetch("data/contact.json");
     contacts = await response.json();
     showContacts(contacts)
 }

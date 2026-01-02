@@ -7,6 +7,14 @@ const message = document.getElementById("toast");
 
 let contacts = []
 
+function isValidName(name) {
+  return /^[A-Za-z ]{2,}$/.test(name)
+}
+
+function isValidPhone(phone) {
+  return /^[0-9]{10}$/.test(phone)
+}
+
 async function loadContacts() {
   const response = await fetch("data/contact.json")
   contacts = await response.json()
@@ -15,11 +23,11 @@ async function loadContacts() {
 
 function showMessage(text, type = "error") {
   message.textContent = text;
-  message.className = type;
+  message.className = `toast ${type}`;
   message.style.display = "block";
 
   setTimeout(() => {
-    toast.style.display = "none";
+    message.style.display = "none";
   }, 2000);
 }
 
@@ -65,10 +73,16 @@ function showContacts(list) {
         const newName = nameEdit.value.trim()
         const newPhone = phoneEdit.value.trim()
 
-        if (newName === "" || newPhone === "") {
-          showMessage("❌ Name and phone cannot be empty")
-          return
-        }
+        if (!isValidName(newName)) {
+  showMessage("❌ Invalid name")
+  return
+}
+
+if (!isValidPhone(newPhone)) {
+  showMessage("❌ Phone must be 10 digits")
+  return
+}
+
 
         if (contacts.some(c => c.phone === newPhone && c.id !== contact.id)) {
           showMessage("❌ Phone number already exists")
@@ -90,8 +104,13 @@ addBtn.addEventListener("click", () => {
   const name = nameInput.value.trim()
   const phone = phoneInput.value.trim()
 
-  if (name === "" || phone === "") {
-    showMessage("❌ All fields are required")
+  if (!isValidName(name)) {
+    showMessage("❌ Enter valid name (letters only)")
+    return
+  }
+
+  if (!isValidPhone(phone)) {
+    showMessage("❌ Phone must be 10 digits")
     return
   }
 
@@ -112,6 +131,7 @@ addBtn.addEventListener("click", () => {
   showContacts(contacts)
   showMessage("✅ Contact added successfully", "success")
 })
+
 
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase()

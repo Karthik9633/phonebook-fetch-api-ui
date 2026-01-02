@@ -61,7 +61,7 @@ function showContacts(list) {
     card.querySelector(".edit").addEventListener("click", () => {
       card.innerHTML = `
         <input type="text" value="${contact.name}">
-        <input type="text" value="${contact.phone}">
+        <input type="tel" value="${contact.phone}">
         <div class="actions">
           <button class="save">Save</button>
         </div>
